@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee Form</title>
+        <!-- Include Bootstrap CSS link here -->
+    </head>
+    <body>
+        <div class="container mt-5">
+            <form id="employeeForm">
+                <div class="mb-3">
+                    <label for="employeeID" class="form-label">Employee ID</label>
+                    <input type="text" class="form-control" id="employeeID" required>
+                </div>
+                <div class="mb-3">
+                    <label for="employeeName" class="form-label">Employee Name</label>
+                    <input type="text" class="form-control" id="employeeName" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="salary" class="form-label">Salary</label>
+                    <input type="number" class="form-control" id="salary" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="hra" class="form-label">HRA</label>
+                    <input type="number" class="form-control" id="hra" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="da" class="form-label">DA</label>
+                    <input type="number" class="form-control" id="da" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="deduction" class="form-label">Deduction</label>
+                    <input type="number" class="form-control" id="deduction" required disabled>
+                </div>
+                <button type="button" class="btn btn-primary" id="saveButton" disabled>Save</button>
+                <button type="button" class="btn btn-secondary" id="changeButton" disabled>Change</button>
+                <button type="button" class="btn btn-danger" id="resetButton" disabled>Reset</button>
+            </form>
+        </div>
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const employeeIDInput = document.getElementById("employeeID");
+        const employeeNameInput = document.getElementById("employeeName");
+        const salaryInput = document.getElementById("salary");
+        const hraInput = document.getElementById("hra");
+        const daInput = document.getElementById("da");
+        const deductionInput = document.getElementById("deduction");
+        const saveButton = document.getElementById("saveButton");
+        const changeButton = document.getElementById("changeButton");
+        const resetButton = document.getElementById("resetButton");
+
+        // Function to enable/disable form inputs
+        function toggleFormInputs(disabled) {
+        employeeNameInput.disabled = disabled;
+        salaryInput.disabled = disabled;
+        hraInput.disabled = disabled;
+        daInput.disabled = disabled;
+        deductionInput.disabled = disabled;
+        }
+
+        // Function to reset the form
+        function resetForm() {
+        employeeIDInput.value = "";
+        employeeNameInput.value = "";
+        salaryInput.value = "";
+        hraInput.value = "";
+        daInput.value = "";
+        deductionInput.value = "";
+        toggleFormInputs(true);
+        saveButton.disabled = true;
+        changeButton.disabled = true;
+        }
+
+        // Event listener for employeeID input change
+        employeeIDInput.addEventListener("change", function () {
+        // Simulate checking if the ID exists in the database
+        const idExists = false; // Replace with actual check
+
+        if (idExists) {
+        // Populate form with existing data
+        // Enable Change and Reset buttons
+        toggleFormInputs(false);
+        changeButton.disabled = false;
+        resetButton.disabled = false;
+        employeeNameInput.focus();
+        } else {
+        // Enable Save and Reset buttons
+        toggleFormInputs(false);
+        saveButton.disabled = false;
+        resetButton.disabled = false;
+        employeeNameInput.focus();
+        }
+        });
+
+        // Event listener for Save button
+        saveButton.addEventListener("click", function () {
+        // Perform save operation (e.g., AJAX request to save data in the database)
+        // After saving, reset the form
+        resetForm();
+        });
+
+        // Event listener for Change button
+        changeButton.addEventListener("click", function () {
+        // Perform update operation (e.g., AJAX request to update data in the database)
+        // After updating, reset the form
+        resetForm();
+        });
+
+        // Event listener for Reset button
+        resetButton.addEventListener("click", function () {
+        resetForm();
+        });
+
+        // Initialize the form
+        resetForm();
+        });
+
+    </body>
+</html>
+
